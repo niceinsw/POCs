@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Article";
+    string fileName = ViewBag.FileName;
+}
+
+<div class="row">
+    <div class="col-md-3">
+        @Html.Partial("~/Views/Files/_articlelinks.cshtml")
+    </div>
+
+    <div class="col-md-9">
+        @{
+            string articleFile = @"~/Views/Files/Articles/" + fileName;
+            var filePath = Server.MapPath(articleFile);
+            if (System.IO.File.Exists(filePath))
+            {
+                @Html.Partial("~/Views/Files/Articles/" + fileName)
+            }
+        }
+    </div>
+</div>

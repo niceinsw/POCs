@@ -1,0 +1,14 @@
+﻿@model List<CategoryListResponse>
+@{
+    ViewBag.Title = "Categories";
+    var mod = Model;
+    string catUrl = "";
+}
+
+<h2>Categories</h2>
+
+@foreach (var cat in Model)
+{
+    catUrl = "http://localhost:53439/home/CatPosts/" + cat.id;
+    <p><a href="@catUrl">@cat.name</a></p>
+}

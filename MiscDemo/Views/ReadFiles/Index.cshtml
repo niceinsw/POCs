@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Index";
+    List<string> articles = ViewBag.Articles;
+}
+
+<div class="row">
+    <div class="col-md-3">
+        @Html.Partial("~/Views/Files/_articlelinks.cshtml")
+    </div>
+
+    <div class="col-md-9">
+        @foreach (var article in articles)
+        {
+            string articleFile = @"~/Views/Files/Articles/" + article;
+            var filePath = Server.MapPath(articleFile);
+            if (System.IO.File.Exists(filePath))
+            {
+                @Html.Partial("~/Views/Files/Articles/" + article, article.Replace(".cshtml", ""))
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <button class="btn btn-info" id="getjs">Get Js</button>
+    </div>
+    <div class="col-md-4" id="jsresult"></div>
+</div>
+
+<br /><br />
+
+<div class="row">
+    <div class="col-md-4">
+        <button class="btn btn-info" id="getjsondate">Get Json Date</button>
+    </div>
+    <div class="col-md-4" id="jsondateresult"></div>
+</div>
+
+<br /><br />
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $(document).on("click", "#getjs", function (e) {
+                console.log("calling js");
+                //$.get("/home/jsresult",
+                //    function(data) {
+                //        //$("#jsresult").text(data);
+                //    });
+
+                $.get("/home/jsresult");
+            });
+
+            $(document).on("click",
+                "#getjsondate",
+                function(e) {
+                    $.get("/home/jsondates",
+                        function(data) {
+                            console.log("Json: " + data);
+                            console.log("String: " + JSON.stringify(data));
+
+                            var newEpoch = data.dateCreated.replace("/Date(", "").replace(")/","");
+
+                            console.log("New Epoch: " + newEpoch);
+
+                            //this._datePipe.transform(new Date(startDateTime),"yyyyMMdd-HHmm"); 
+                            var strDate = new Date(parseInt(data.dateCreated.substr(6)));
+                            
+                            console.log("Date: " + strDate);
+
+                            console.log("Simple Date: " + new Date(1553703195368));
+
+                            var dt = new Date(parseInt(newEpoch));
+
+                            console.log("From Epoch: " + dt.getDate());
+
+                            console.log("Current: " + new Date().getTime());
+
+
+                            var currentEpoch = new Date().getTime();
+
+                            console.log("Local Time: " + new Date() + " Current Epoch: " + currentEpoch);
+
+                            var pakistanEpoch = currentEpoch + 18000000;
+
+                            console.log("Pakistan Time: " + new Date(pakistanEpoch) + " Pakistan Epoch: " + pakistanEpoch);
+
+                        });
+                });
+
+        });
+    </script>
+}

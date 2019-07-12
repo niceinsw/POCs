@@ -1,0 +1,9 @@
+﻿@model PostResponse
+@{
+    ViewBag.Title = "SinglePost";
+}
+
+<h2>@Model.title.rendered</h2>
+<small>@Html.Raw(Model.excerpt.rendered)</small>
+
+@Html.Raw(Model.content.rendered)

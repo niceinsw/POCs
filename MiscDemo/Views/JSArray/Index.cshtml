@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    var idList = new List<int>()
+{
+10,12,14,16, 100, 51
+};
+}
+<br /><br /><br />
+<h2>Handlebar Example</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <script id="address-template" type="text/x-handlebars-template">
+            <p>You can find me in {{city}}. My address is {{number}} {{street}}.</p>
+        </script>
+        <div class="content-placeholder">
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-info" id="get-contact">Get Contact</button>
+            </div>
+        </div>
+        <br /><br />
+              <div class="row">
+                  <div class="col-md-4">
+                      <input type="text" id="array-value" class="form-control" value="5" />
+                  </div>
+
+                  <div class="col-md-4">
+                      <button class="btn btn-info" id="find-in-array">Find in array</button>
+                  </div>
+                  <div class="col-md-4">
+                      <p class="array-result"></p>
+                  </div>
+              </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+
+        $(function () {
+            @foreach (var id in idList)
+            {
+                @:myArray.push(@id);
+            }
+
+            $(document).on("click", "#find-in-array", function (e) {
+                e.preventDefault();
+
+                myArray.push(22);
+
+                val = $("#array-value").val();
+
+                console.log("Find in array: " + val);
+
+                var res = myArray.find(v => v==val);
+
+                if (res!=null) {
+                    console.log("Found in array: " + res);
+                    $(".array-result").html(res);
+                }
+                else {
+                    $(".array-result").text("not found");
+                }
+
+            });
+
+
+            $(document).on("click", "#get-contact", function (e) {
+                e.preventDefault();
+                console.log("Get Contact button clicked...");
+                $.get("getcontact", function (data) {
+                    console.log("Contact data received: " + data);
+                    console.log("Data string: " + JSON.stringify(data));
+                    UpdateContacts(data);
+                });
+            });
+        });
+
+        function UpdateContacts(contactData) {
+            console.log("Updating contact data: " + contactData);
+
+            //1- get html template
+            var templateScript = $("#address-template").html();
+
+            //2- compile the template
+            var template = Handlebars.compile(templateScript);
+
+            //3- get json data
+
+            //4- pass jsondata to the template
+            var compiledData = template(contactData);
+
+            //5- Add or replace data in target element
+            $(".content-placeholder").prepend(compiledData);
+        }
+    </script>
+}

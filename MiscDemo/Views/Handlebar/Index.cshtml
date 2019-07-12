@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .address {
+        border: 2px solid #fff;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+    .black-border {
+        border-color: #000;
+    }
+
+    .green-border {
+        border-color: #ffff00;
+    }
+</style>
+
+<br /><br /><br />
+<h2>Handlebar Example</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="content-holder">
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-info" id="get-contact">Get Contact</button>
+            </div>
+        </div>
+        <br /><br />
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" id="array-value" class="form-control" value="5" />
+            </div>
+
+            <div class="col-md-4">
+                <button class="btn btn-info" id="find-in-array">Find in array</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script id="address-template" type="text/x-handlebars-template">
+    <div class="address" id="address-{{Id}}">
+        <p>Address Id: {{Id}}: You can find me in {{city}}. My address is {{number}} {{street}}.</p>
+    </div>
+</script>
+
+
+@section scripts {
+    <script>
+        var addressIds = [];
+        $(function () {
+            $(document).on("click", "#get-contact", function (e) {
+                e.preventDefault();
+                console.log("Get Contact button clicked...");
+                $.get("handlebar/getcontact", function (data) {
+                    console.log("Contact data received: " + data);
+                    console.log("Data string: " + JSON.stringify(data));
+                    UpdateContacts(data);
+
+                    console.log("Id: " + data.Id);
+                    UpdateAddressLayout(data);
+
+                });
+            });
+        });
+
+        function UpdateContacts(contactData) {
+            console.log("Updating contact data: " + contactData);
+
+            //1- get html template
+            var templateScript = $("#address-template").html();
+
+            //2- compile the template
+            var template = Handlebars.compile(templateScript);
+
+            //3- get json data
+
+            //4- pass jsondata to the template
+            var compiledData = template(contactData);
+
+            //5- Add or replace data in target element
+            $(".content-holder").prepend(compiledData);
+        }
+
+        function UpdateAddressLayout(contactData) {
+            $(".address").removeClass("black-border").addClass("green-border");
+
+            if ($(".content-holder").find("#address-" + contactData.Id).length) {
+                var element = $(".content-holder").find("#address-" + contactData.Id);
+                $(element).addClass("black-border").removeClass("green-border");
+                console.log("Found new address div");
+            } else {
+                console.log("Address not found");
+            }
+        }
+    </script>
+}

@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutWide.cshtml";
+    ViewBag.Title = "Contact";
+}
+<style>
+    .container-fluid.full-width {
+        padding-left: 0;
+        padding-right: 0;
+        overflow-x: hidden;        
+    }
+
+    .wide-bg {
+        padding: 10px;        
+    }
+
+    .wide-bg.widegrey {
+        background-color: #F3F3EE !important;
+    }
+
+    .wide-bg.widelblue {
+        background-color: #1fb6ff !important;
+    }        
+</style>
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<address>
+    One Microsoft Way<br />
+    Redmond, WA 98052-6399<br />
+    <abbr title="Phone">P:</abbr>
+    425.555.0100
+</address>
+
+<address>
+    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+</address>
+
+<div class="wide-bg widegrey">
+    <p>test text</p>
+</div>
+
+<div class="wide-bg widelblue">
+    <p>test text</p>
+</div>

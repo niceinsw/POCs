@@ -1,0 +1,13 @@
+﻿@model List<PostResponse>
+@{
+    ViewBag.Title = "CatPosts";
+    string postUrl = "";
+}
+
+<h2>CatPosts</h2>
+
+@foreach (var post in Model)
+{
+    postUrl = $"/Home/singlePost/{post.id}";
+    <p><a href="@postUrl">@post.title.rendered</a></p>
+}

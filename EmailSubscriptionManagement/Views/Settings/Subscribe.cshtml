@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Subscribe";
+}
+
+<h2>Subscribe</h2>
+
+@if (ViewBag.UpdateSubscriptionError != null)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <p>Error retreiving your subscription details. Please enter your email to subscribe.</p>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>SubscriptionRequest</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" name="emailId" , class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Subscribe" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}

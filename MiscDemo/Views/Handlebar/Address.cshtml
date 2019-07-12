@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Address";
+}
+
+<h2>Address Demo</h2>
+
+<p>Use this area to provide additional information.</p>
+
+<script id="address-template" type="text/x-handlebars-template">
+    <p>You can find me in {{city}}. My address is {{number}} {{street}}.</p>
+</script>
+
+<button type="button" class="btn btn-default get-address">Get Address</button>
+
+<div class="content-placeholder">
+    <p>This is hb generated content</p>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+
+            //1 - get html template
+            var templateScript = $("#address-template").html();
+
+            //2 compile the template
+            var template = Handlebars.compile(templateScript);
+
+            var jsonData;
+
+            $(".get-address").click(function () {
+                $.ajax({
+                    url: "getaddress",
+                    type: "get",
+                    async: false,
+                    success: function (response) {
+                        jsonData = response;
+                    }
+                });            
+            
+                var compiledHtml = template(jsonData);                
+                $(".content-placeholder").html(compiledHtml);
+
+            });
+
+        });
+    </script>
+}

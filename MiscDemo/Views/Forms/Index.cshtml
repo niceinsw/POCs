@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<br /><br /><br /><br />
+<h2>Index</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="form-test-1" action="~/forms/post" method="post">
+            <input type="text" name="Message" class="form-control"/>
+            
+            <input type="hidden" name="CountryId" value="100" />
+            <br />
+            <button class="btn btn-info btn-sendmessage">Send Message</button>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            console.log("Forms ready");
+
+            $(document).on("click", ".btn-sendmessage", function (e) {
+                e.preventDefault();
+                console.log("Submitting form..");
+                var formurl = $("#form-test-1").attr("action");
+
+                $.ajax({
+                    type: 'post',//$("#form-test-1").attr("method"),
+                    url: formurl,
+                    data: $("#form-test-1").serialize(),
+                    success: function(data) {
+                        console.log("Simple data: " + data);
+                        console.log("String data: " + JSON.stringify(data));
+                    },
+                    error: function(data) {
+                        console.log("Error data: " + data);
+                        console.log("Error String data: " + JSON.stringify(data));
+                    }
+                });
+
+            });
+        });
+    </script>
+}
