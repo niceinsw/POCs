@@ -1,15 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using BusinessLogic.DomainModels.UserModels;
+using BusinessLogic.Interfaces;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Website.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly IUserService _userService;
+        public HomeController(IUserService userService)
         {
+            _userService = userService;
+        }
+
+        public async Task<ActionResult> Index()
+        {
+            //await AddUser();
+            //await GetUsers();
+            await GetUser();
             return View();
         }
 
@@ -25,6 +33,35 @@ namespace Website.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        private async Task AddUser()
+        {
+            try
+            {
+                var newUser = new CreateUserRequest()
+                {
+                    FullName = "Tester 277",
+                    Email = "jani2@mailinator.com"
+                };
+
+                var res = await _userService.AddUser(newUser);
+            }
+            catch (System.Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        private async Task GetUsers()
+        {
+            var res = await _userService.GetUsers();
+        }
+
+        private async Task GetUser()
+        {
+            var res = await _userService.GetUser(2);
         }
     }
 }

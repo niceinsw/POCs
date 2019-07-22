@@ -1,8 +1,5 @@
 ﻿using BusinessLogic.DomainModels.UserModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLogic.Interfaces
@@ -10,6 +7,7 @@ namespace BusinessLogic.Interfaces
     public interface IUserService
     {
         Task<int> AddUser(CreateUserRequest model);
+        Task<List<UserResponse>> GetUsers();
         Task<UserResponse> GetUser(int id);
         Task DeleteUser(int id);
     }

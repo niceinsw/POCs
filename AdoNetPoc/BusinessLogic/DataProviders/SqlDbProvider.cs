@@ -1,11 +1,8 @@
 ﻿using BusinessLogic.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLogic.DataProviders
@@ -16,7 +13,7 @@ namespace BusinessLogic.DataProviders
 
         public SqlDbProvider()
         {
-            _connectionString = ConfigurationManager.AppSettings["MyConnectionString"];
+            _connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         }
 
         public async Task<SqlDataReader> ExcecuteReaderProcedure(string storedProcedure, SqlParameter[] parameters = null)
