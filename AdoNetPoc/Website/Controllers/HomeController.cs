@@ -15,9 +15,9 @@ namespace Website.Controllers
 
         public async Task<ActionResult> Index()
         {
-            //await AddUser();
+            await AddUser();
             //await GetUsers();
-            await GetUser();
+            //await GetUser();
             return View();
         }
 
@@ -41,8 +41,8 @@ namespace Website.Controllers
             {
                 var newUser = new CreateUserRequest()
                 {
-                    FullName = "Tester 277",
-                    Email = "jani2@mailinator.com"
+                    FullName = "Tester 477",
+                    Email = "jani4@mailinator.com"
                 };
 
                 var res = await _userService.AddUser(newUser);
