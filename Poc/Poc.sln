@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenSecurity", "..\TokenSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPCM", "..\WPCM\WPCM.csproj", "{23AE5F09-C041-4AC8-8597-8B16CF5D0A3F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientPoc", "HttpClientPoc\HttpClientPoc.csproj", "{450BBD31-09CA-4A82-B794-19FBBC037CC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{23AE5F09-C041-4AC8-8597-8B16CF5D0A3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23AE5F09-C041-4AC8-8597-8B16CF5D0A3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23AE5F09-C041-4AC8-8597-8B16CF5D0A3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{450BBD31-09CA-4A82-B794-19FBBC037CC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{450BBD31-09CA-4A82-B794-19FBBC037CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{450BBD31-09CA-4A82-B794-19FBBC037CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{450BBD31-09CA-4A82-B794-19FBBC037CC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
