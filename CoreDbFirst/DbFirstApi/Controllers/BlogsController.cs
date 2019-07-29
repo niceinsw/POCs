@@ -1,8 +1,10 @@
-﻿using DbFirstDataLayer.Entities;
+﻿using DbFirstApi.SpServices;
+using DbFirstDataLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,6 +25,7 @@ namespace DbFirstApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Blog>>> GetBlog()
         {
+            CreateBlog();
             try
             {
                 using (var bd = new BloggingContext())
@@ -35,6 +38,37 @@ namespace DbFirstApi.Controllers
                 throw;
             }
             //return await _context.Blog.ToListAsync();
+        }
+
+
+        private void CreateBlog()
+        {
+            try
+            {
+                var blog = new Blog()
+                {
+                    Url = "http://www.gethirenow.com"
+                };
+
+                var dbProvider = new SqlDbProvider();
+                var res = dbProvider.ExecuteNonQueryProcedure("CreateBlog", GetBlogParameters(blog)).Result;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        private SqlParameter[] GetBlogParameters(Blog blog)
+        {
+            return new SqlParameter[]{
+                new SqlParameter()
+                {
+                    ParameterName = "@Url",
+                    Value = blog.Url
+                }
+            };
         }
 
         // GET: api/Blogs/5
