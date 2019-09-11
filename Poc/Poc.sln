@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPCM", "..\WPCM\WPCM.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientPoc", "HttpClientPoc\HttpClientPoc.csproj", "{450BBD31-09CA-4A82-B794-19FBBC037CC1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jwt-Api-Auth-Core", "Jwt-Api-Auth-Core\Jwt-Api-Auth-Core.csproj", "{19FED00A-29CA-4FE3-BFFC-E8C3CC565B3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,10 @@ Global
 		{450BBD31-09CA-4A82-B794-19FBBC037CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{450BBD31-09CA-4A82-B794-19FBBC037CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{450BBD31-09CA-4A82-B794-19FBBC037CC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19FED00A-29CA-4FE3-BFFC-E8C3CC565B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19FED00A-29CA-4FE3-BFFC-E8C3CC565B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19FED00A-29CA-4FE3-BFFC-E8C3CC565B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19FED00A-29CA-4FE3-BFFC-E8C3CC565B3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
