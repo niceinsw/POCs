@@ -41,3 +41,6 @@ namespace IdentityLayered.IdentityModels.Entities
         //public DbSet<Tester> Testers { get; set; }
     }
 }
+
+//Database first scaffolding command
+//Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=IdentityLayered' -Provider Microsoft.EntityFrameworkCore.SqlServer -context IdentityLayeredContext -Project IdentityLayered.DataAccess -OutputDir EntityModels
