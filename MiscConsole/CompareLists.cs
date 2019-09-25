@@ -23,7 +23,7 @@ namespace MiscConsole
         {
             List<int> groupA = new List<int>() { 1, 7, 3, 6 };
 
-            List<int> groupB = new List<int>() { 7, 6, 3, 1, 8 };
+            List<int> groupB = new List<int>() { 7, 6, 3, 1 };
 
             var duplicates = groupA.Intersect(groupB).ToList();
 

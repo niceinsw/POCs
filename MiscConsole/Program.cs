@@ -48,7 +48,7 @@ namespace MiscConsole
 
 
             //List comparison, compare list
-            //CompareLists.CompateTwoIntLists();
+            CompareLists.CompateTwoIntLists();
             CompareLists.CompareIntList();
             //CompareLists.ListHasMatch();
 
