@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.DomainModels.UserModels;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -76,5 +77,92 @@ namespace Website.Services
                 }
             };
         }
+
+        /// <summary>
+        /// Stored procedure
+        /// </summary>
+        /// <param name="procedure"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        private async Task<SqlDataReader> ExecReader(string procedure, SqlParameter[] parameters)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var command = new SqlCommand()
+                {
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = procedure
+                };
+
+                connection.Open();
+
+                if (parameters != null)
+                    command.Parameters.AddRange(parameters);
+
+                return await command.ExecuteReaderAsync();
+            }
+        }
+
+        private async Task<int> ExecNonQuery(string procedure, SqlParameter[] parameters)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                var command = new SqlCommand()
+                {
+                    Connection = connection,
+                    CommandType = CommandType.StoredProcedure,
+                    CommandText = procedure
+                };
+
+                if (parameters != null)
+                    command.Parameters.AddRange(parameters);
+
+                return await command.ExecuteNonQueryAsync();
+            }
+        }
+
+        private async Task CallReader()
+        {
+            List<UserResponse> users = new List<UserResponse>();
+
+            using (var reader = await ExecReader("GetUsers", null))
+            {
+                while (reader.Read())
+                {
+                    users.Add(new UserResponse()
+                    {
+                        Id = int.Parse(reader["Id"].ToString()),
+                        FullName = reader["FullName"].ToString(),
+                        Email = reader["Email"].ToString(),
+                        DateCreated = !string.IsNullOrEmpty(reader["DateCreated"].ToString()) ? DateTime.Parse(reader["DateCreated"].ToString()) : default(DateTime?)
+                    });
+                }
+            }
+        }
+
+        private async Task CallNonQuery()
+        {
+            var userParameters = new SqlParameter[]
+            {
+                new SqlParameter(){
+                    ParameterName = "@FullName",
+                    Value = "Tester 77",
+                },
+                new SqlParameter(){
+                    ParameterName = "@Email",
+                    Value = "Tester@77.com",
+                },
+                new SqlParameter(){
+                    ParameterName = "@DateCreated",
+                    Value = DateTime.UtcNow,
+                }
+            };
+
+            await ExecNonQuery("CreateUser", userParameters);
+        }
+
     }
 }
