@@ -1,9 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MiscConsole.CacheManager
 {
@@ -51,7 +47,7 @@ namespace MiscConsole.CacheManager
 
             };
 
-            var strCache = JsonConvert.SerializeObject(cache);
+            var strCache = ""; //JsonConvert.SerializeObject(cache);
 
             Console.WriteLine(strCache);
             Console.WriteLine("=======================================================");
@@ -74,7 +70,7 @@ namespace MiscConsole.CacheManager
                     }
                 };
 
-            var strTenants = JsonConvert.SerializeObject(tenantList);
+            var strTenants = ""; // JsonConvert.SerializeObject(tenantList);
             //Console.WriteLine(strTenants);
         }
     }

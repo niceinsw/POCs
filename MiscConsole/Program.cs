@@ -1,5 +1,6 @@
 ﻿using MiscConsole.Enums;
 using System;
+using System.Collections.Generic;
 using static MiscConsole.Enums.EnumModels;
 
 namespace MiscConsole
@@ -49,9 +50,11 @@ namespace MiscConsole
 
             //List comparison, compare list
             //CompareLists.CompateTwoIntLists();
-            CompareLists.CompareIntList();
+            //CompareLists.CompareIntList();
             //CompareLists.ListHasMatch();
 
+
+            DemoSociableTime();
             Break();
         }
 
@@ -76,5 +79,66 @@ namespace MiscConsole
             //var res = "Tester".ToEnum<SeverityLevel>();
         }
 
+
+        public static void DemoSociableTime()
+        {
+            var timeList = new List<SocialTime>
+            {
+                new SocialTime {startHour = 20, endHour = 08},
+                new SocialTime {startHour = 21, endHour = 07},
+                new SocialTime {startHour = 22, endHour = 06},
+                new SocialTime {startHour = 23, endHour = 05},
+                new SocialTime {startHour = 00, endHour = 04},
+                new SocialTime {startHour = 1, endHour = 03},
+                new SocialTime {startHour = 2, endHour = 02},
+                new SocialTime {startHour = 19, endHour = 01},
+                new SocialTime {startHour = 18, endHour = 00},
+                new SocialTime {startHour = 17, endHour = 23},
+                new SocialTime {startHour = 16, endHour = 22},
+                new SocialTime {startHour = 15, endHour = 21},
+                new SocialTime {startHour = 14, endHour = 20},
+                new SocialTime {startHour = 13, endHour = 19},
+                new SocialTime {startHour = 12, endHour = 18},
+                new SocialTime {startHour = 11, endHour = 17},
+                new SocialTime {startHour = 10, endHour = 16},
+                new SocialTime {startHour = 09, endHour = 15},
+                new SocialTime {startHour = 8, endHour = 14},
+                new SocialTime {startHour = 7, endHour = 13},
+                new SocialTime {startHour = 6, endHour = 12},
+                new SocialTime {startHour = 5, endHour = 11},
+                new SocialTime {startHour = 4, endHour = 10},
+                new SocialTime {startHour = 3, endHour = 9},
+                new SocialTime {startHour = 2, endHour = 8},
+                new SocialTime {startHour = 1, endHour = 16}
+            };
+
+            foreach (var time in timeList)
+            {
+                Console.WriteLine($"StartHour: {time.startHour}, EndHour: {time.endHour} ----- Next time: {GetSendTime(time.startHour, time.endHour)}");
+            }
+
+        }
+
+        public static DateTime GetSendTime(int startHour, int endHour)
+        {
+            DateTime startTime = new DateTime(2020, 10, 15, startHour, 00, 00);
+            DateTime endTime = new DateTime(2020, 10, 15, endHour, 00, 00);
+
+            //var givenTime = new DateTime(startTime.Year, startTime.Month, startTime.Day, hours, minutes, 00);
+            //var givenHour = givenTime.Hour;
+
+            if (startTime.Hour >= 12 && endTime.Hour < 12)
+            {
+                endTime = endTime.AddDays(1);
+            }
+
+            return endTime.AddMinutes(1);
+        }
+    }
+
+    public class SocialTime
+    {
+        public int startHour { get; set; }
+        public int endHour { get; set; }
     }
 }
