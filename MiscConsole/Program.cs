@@ -1,6 +1,7 @@
 ﻿using MiscConsole.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static MiscConsole.Enums.EnumModels;
 
 namespace MiscConsole
@@ -52,20 +53,21 @@ namespace MiscConsole
             //CompareLists.CompateTwoIntLists();
             //CompareLists.CompareIntList();
             //CompareLists.ListHasMatch();
+            
+            //DemoSociableTime();
 
+            string input = "ramzan khan Jani";
+            var res = input.Capitalise();
 
-            DemoSociableTime();
+            Console.WriteLine(res);
+
             Break();
         }
-
         public static void Break()
         {
             Console.WriteLine("Press any key to exit...");
             Console.ReadKey();
         }
-
-
-
         public static void DemoEnums()
         {
             var service = new EnumService();
@@ -78,8 +80,7 @@ namespace MiscConsole
             var res1 = "Information".ToEnum<SeverityLevel>();
             //var res = "Tester".ToEnum<SeverityLevel>();
         }
-
-
+        
         public static void DemoSociableTime()
         {
             var timeList = new List<SocialTime>
@@ -133,6 +134,25 @@ namespace MiscConsole
             }
 
             return endTime.AddMinutes(1);
+        }
+
+        public static string Capitalise(this string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return value;
+
+            var values = value.Split(' ').ToList();
+
+            string res = "";
+
+            foreach (var item in values)
+            {
+                var cap = item.First().ToString().ToUpper() + item.Substring(1);
+                res = $"{res}{cap} ";
+                res = res.Trim();
+            }
+
+            return res;
         }
     }
 
